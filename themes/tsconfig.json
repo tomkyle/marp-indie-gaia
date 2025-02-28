@@ -1,0 +1,10 @@
+{
+  "extends": ["@tsconfig/recommended/tsconfig", "@tsconfig/node20/tsconfig"],
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "sourceMap": true
+  },
+  "include": ["src"]
+}
