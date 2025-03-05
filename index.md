@@ -1,6 +1,7 @@
 ---
 theme: indie-gaia
 lang: en-US
+
 ---
 
 
@@ -14,20 +15,53 @@ Opinionated Marp Theme
 Inspired by and based on 
 Yuki Hattori’s classic [Gaia](https://github.com/marp-team/marp-core/tree/main/themes#gaia) theme
 
----
 
+
+---
 
 <!-- 
 _class: lead
 -->
 
-## Features 
+## Features
 
 - System font stack with `system-ui, sans-serif`
 - Support for `color-scheme: light dark`
 - Support for `prefers-contrast: less|more`
 - Typographic blockquotes for `lang="de|en|es|fr|it|CH"`
 - Compatible to Gaia’s `invert` and `gaia` coloring
+
+[Project](#3)
+
+---
+
+<!-- 
+_class: lead invert
+-->
+
+## Project Links
+
+[Features](#2) · [Usage](#4) 
+
+[GitHub](https://github.com/tomkyle/marp-indie-gaia) · [Issues](https://github.com/tomkyle/marp-indie-gaia/issues) · [Discuss](https://github.com/tomkyle/marp-indie-gaia/discussions)
+
+
+
+---
+
+<!-- 
+_class: lead
+-->
+
+## Usage
+
+1. Store [indie-gaia.css](indie-gaia.css) in project directory
+2. Add `theme: indie-gaia` to your slides frontmatter
+3. Marp your slide deck
+4. Toggle light and dark color schemes using [DevTools](https://devtoolstips.org/tips/en/emulate-color-schemes/)
+5. Emulate contrast settings using [Chrome](https://developer.chrome.com/blog/devtools-tips-10/)
+
+[Project](#3)
 
 ---
 
