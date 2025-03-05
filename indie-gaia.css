@@ -1,0 +1,424 @@
+/*!
+ * Indie Gaia CSS
+ *
+ * Based on Yuki Hattori’s Marp / Marpit Gaia theme.
+ * Key differences:
+ *
+ *   - No external webfonts, just generic platform fonts
+ *
+ * @theme indie-gaia
+ * @author Carsten Witt
+ *
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ * @size 4:3 960px 720px
+ */
+
+
+:root {
+  /* Color palette as defined by Yuki Hattori */
+  --paper:      #fff8e1;
+  --ink:        #455a64;
+  --primary:    #0288d1;
+  --secondary:  #81d4fa;
+
+  /* Font stack */
+  --font-sans-serif:   system-ui, ui-sans-serif, sans-serif;
+  --font-serif:        ui-serif, Iowan Old Style, "Sitka Text", "Cambria", "Gentium Plus", Times New Roman, Times, "Tinos", Georgia, serif;
+  --font-monospace:    ui-monospace, 'Roboto Mono', 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+
+  /* Opinionated */
+  --padding-side: 70px;
+}
+
+
+/* Default color variant */
+/*@media (prefers-contrast: no-preference) {*/
+:root {
+  --color-light:      var(--paper);
+  --color-dark:       var(--ink);
+  --color-primary:    var(--primary);
+  --color-secondary:  var(--secondary);
+}
+/*}*/
+
+/* Make dark colors even darker */
+@media (prefers-contrast: more) {
+  :root {
+    --color-dark:      color-mix(in oklab, var(--ink),       black 30%);
+    --color-primary:   color-mix(in oklab, var(--primary),   black 20%);
+    --color-secondary: color-mix(in oklab, var(--secondary), black 20%);
+  }
+}
+
+/* Lighten dark colors a bit */
+@media (prefers-contrast: less) {
+  :root {
+    --color-dark:      color-mix(in oklab, var(--ink),       var(--paper) 30%);
+    --color-primary:   color-mix(in oklab, var(--primary),   var(--paper) 20%);
+    --color-secondary: color-mix(in oklab, var(--secondary), var(--paper) 20%);
+  }
+}
+
+/* Light and Dark Mode support */
+:root {
+  color-scheme: light dark;
+
+  /* Change these in color variants */
+  --color-background: light-dark(var(--color-light), var(--color-dark));
+  --color-foreground: light-dark(var(--color-dark), var(--color-light));
+  --color-highlight:  var(--color-primary);
+
+  /* Will adapt to color variants automatically */
+  --color-background-stripe: color-mix(in oklab,  var(--color-background),  var(--color-foreground) 10%);
+  --color-dimmed:            color-mix(in oklab,  var(--color-background),  var(--color-foreground) 70%);
+}
+
+
+/* Actual Styling */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.5em 0 0;
+
+  strong {
+    font-weight: inherit;
+  }
+
+  &::part(auto-scaling) {
+    max-height: 580px; /* Slide height - padding * 2 */
+  }
+}
+
+h1 {
+  font-size: 1.8em;
+  font-width: 90%;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.9em;
+}
+
+p,
+blockquote {
+  margin: 1em 0 0;
+}
+
+ul,
+ol {
+  > li {
+    margin: 0.3em 0 0;
+
+    > p {
+      margin: 0.6em 0 0;
+    }
+  }
+}
+
+code {
+  display: inline-block;
+  font-family: var(--font-monospace);
+  font-size: 0.8em;
+  letter-spacing: 0;
+  margin: -0.1em 0.15em;
+  padding: 0.1em 0.2em;
+  vertical-align: baseline;
+}
+
+pre {
+  display: block;
+  margin: 1em 0 0;
+  overflow: visible;
+
+  code {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 100%;
+    padding: 0.5em;
+    font-size: 0.7em;
+  }
+
+  &::part(auto-scaling) {
+    max-height: calc(580px - 1em);
+  }
+}
+
+blockquote {
+  margin: 1em 0 0;
+  padding: 0 0.75em;
+  position: relative;
+  font-weight: lighter; /* Carsten’s tweak */
+  text-wrap: balance;
+
+  &::after,
+  &::before {
+    content: '“';
+    display: block;
+    font-family: var(--font-serif);
+    font-weight: bold;
+    position: absolute;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+    bottom: 0;
+    transform: rotate(180deg);
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+}
+
+/* Carsten’s quotation mark tweaks */
+:root[lang^="de"] blockquote::before { content: "»"; }
+:root[lang^="de"] blockquote::after { content: "«"; transform: none;}
+:root[lang^="fr"] blockquote::before { content: "«"; }
+:root[lang^="fr"] blockquote::after { content: "»"; transform: none;}
+:root[lang^="es"] blockquote::before { content: "«"; }
+:root[lang^="es"] blockquote::after { content: "»"; transform: none;}
+:root[lang^="it"] blockquote::before { content: "«"; }
+:root[lang^="it"] blockquote::after { content: "»"; transform: none;}
+
+:root[lang$="CH"] blockquote::before { content: "«"; }
+:root[lang$="CH"] blockquote::after { content: "»"; transform: none;}
+
+
+section blockquote:has([lang^="en"])::before { content: "“" !important; }
+section blockquote:has([lang^="en"])::after { content: "“" !important; transform: rotate(180deg) !important; }
+
+section blockquote:has([lang^="de"])::before { content: "»" !important; }
+section blockquote:has([lang^="de"])::after { content: "«" !important; transform: none !important;}
+section blockquote:has([lang^="fr"])::before { content: "«" !important; }
+section blockquote:has([lang^="fr"])::after { content: "»" !important; transform: none !important;}
+section blockquote:has([lang^="es"])::before { content: "«" !important; }
+section blockquote:has([lang^="es"])::after { content: "»" !important; transform: none !important;}
+section blockquote:has([lang^="it"])::before { content: "«" !important; }
+section blockquote:has([lang^="it"])::after { content: "»" !important; transform: none !important;}
+section blockquote:has([lang$="CH"])::before { content: "«" !important; }
+section blockquote:has([lang$="CH"])::after { content: "»" !important; transform: none !important;}
+/* END quotation marks */
+
+
+
+mark {
+  background: transparent;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 1em 0 0;
+
+  th,
+  td {
+    padding: 0.2em 0.4em;
+    border-width: 1px;
+    border-style: solid;
+  }
+}
+
+header,
+footer,
+section::after {
+  box-sizing: border-box;
+  font-size: 66%;
+  height: 70px;
+  line-height: 50px;
+  overflow: hidden;
+  padding: 10px 25px;
+  padding-left: var(--padding-side); /* My opinion */
+  position: absolute;
+}
+
+header {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+footer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+}
+
+section {
+  background-color: var(--color-background);
+  background-image: linear-gradient(
+    135deg,
+    rgba(#888, 0),
+    rgba(#888, 0.02) 50%,
+    rgba(#fff, 0) 50%,
+    rgba(#fff, 0.05)
+  );
+  color: var(--color-foreground);
+  font-size: 35px;
+  font-family: var(--font-sans-serif);
+  height: 720px;
+  line-height: 1.35;
+  letter-spacing: 1.25px;
+  padding: 70px;
+  padding-left: var(--padding-side); /* My opinion */
+  width: 1280px;
+  word-wrap: break-word;
+
+
+
+  &::after {
+    right: 0;
+    bottom: 0;
+    font-size: 80%;
+  }
+
+  a,
+  mark {
+    color: var(--color-highlight);
+  }
+
+  code {
+    background: var(--color-dimmed);
+    color: var(--color-background);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    strong {
+      color: var(--color-highlight);
+    }
+  }
+
+  pre {
+    background: var(--color-foreground);
+  }
+
+  pre > code {
+    background: transparent;
+  }
+
+  header,
+  footer,
+  section::after,
+  blockquote::before,
+  blockquote::after {
+    color: var(--color-dimmed);
+  }
+
+  table {
+    th,
+    td {
+      border-color: var(--color-foreground);
+    }
+
+    thead th {
+      background: var(--color-foreground);
+      color: var(--color-background);
+    }
+
+    tbody > tr:nth-child(odd) {
+      td,
+      th {
+        background: var(--color-background-stripe, transparent);
+      }
+    }
+  }
+
+  > *:first-child,
+  > header:first-child + * {
+    margin-top: 0;
+  }
+
+  &.invert {
+    --color-background: light-dark(var(--color-dark),      var(--color-light));
+    --color-foreground: light-dark(var(--color-light),     var(--color-dark));
+    --color-highlight:  light-dark(var(--color-secondary), var(--color-primary));
+  }
+
+  &.gaia {
+    --color-background: light-dark(var(--color-primary),   color-mix(in oklab,  var(--color-primary),   var(--color-dark) 50%));
+    --color-foreground: light-dark(var(--color-light),     color-mix(in oklab,  var(--color-light),     var(--color-dark) 10%));
+    --color-highlight:  light-dark(var(--color-secondary), var(--color-secondary));
+  }
+
+  &.lead {
+    place-content: safe center center;
+
+    /* Definitions for classic bhavior: Users can adopt flex centering by tweaking style `section.lead { display: flex }` */
+    flex-flow: column nowrap;
+    align-items: stretch;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: center;
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    p {
+      text-align: center;
+    }
+
+    blockquote {
+      > h1,
+      > h2,
+      > h3,
+      > h4,
+      > h5,
+      > h6,
+      > p {
+        text-align: left;
+      }
+    }
+
+    ul,
+    ol {
+      > li > p {
+        text-align: left;
+      }
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+/*
+@media (prefers-contrast: more) {
+  section {
+    filter: contrast(1.75);
+  }
+}*/

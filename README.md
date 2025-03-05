@@ -1,49 +1,91 @@
 # Indie Gaia Marp Theme
 
+**Modern CSS features for Yuki Hattori’s [Marp Gaia](https://github.com/marp-team/marp-core/blob/main/themes/gaia.scss) theme.**
 
-### Original Gaia Theme 
-Original Gaia theme on GitHub:
+## Overview
 
-https://github.com/marp-team/marp-core/blob/main/themes/gaia.scss
-
-Source Code:
-
-https://raw.githubusercontent.com/marp-team/marp-core/refs/heads/main/themes/gaia.scss
+- System font stack with `system-ui, sans-serif`
+- Support for `color-scheme: light dark`
+- Support for `prefers-contrast: less|more`
+- Typographic blockquotes for `lang="de|en|es|fr|it|CH"`
+- Compatible to Gaia’s `invert` and `gaia` coloring.
 
 ## Usage
 
-### The easy way (with VS Code)
+Download [./indie-gaia.css](indie-gaia.css) to your presentation project and add it to your Marp frontmatter. Start Marp’s built-in server with `marp -s .` and visit [http://localhost:8080/](http://localhost:8080/)
 
-https://yoanbernabeu.github.io/MARP-Template-Library/docs/intro
-
-The easiest and fastest solution is to use the [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode) extension.
-
-1. Find your theme in our library ([Dracula](https://yoanbernabeu.github.io/MARP-Template-Library/docs/themes/dracula) for example).
-2. Copy the url of the CSS file.
-3. Add a `.vscode/settings.json` file in your project.
-4. Add the following line in your `.vscode/settings.json` file (replace the `Dracula url` with your theme url):
-
-```json
-{
-    "markdown.marp.themes": [
-        "https://raw.githubusercontent.com/dracula/marp/master/dracula/dracula.css"
-    ]
-}
+```markdown
+---
+theme: indie-gaia
+---
 ```
 
+>  **VS Code** users will want to read the recipe [The easy way (with VS Code)](https://yoanbernabeu.github.io/MARP-Template-Library/docs/intro/) over on *MARP Template Library.*
 
+## Features
 
-## Development Notes
+### Color Schemes and Contrast
 
-Add Git subtree:
+Colors in this scheme are based on the original [Marp Gaia](https://github.com/marp-team/marp-core/blob/main/themes/gaia.scss) theme. *Indie Gaia* will display the HTML presentation according to the current **light** or **dark color scheme** as defined in browser or OS. 
 
-```shell
-$ git subtree add --prefix=themes git@github.com:marp-team/marp-core.git main --squash
+- Both the  `gaia` and `invert` settings work as expected.
+- User settings for `prefers-contrast` are supported.
+
+### Typographic blockquotes
+
+Like in original Gaia theme, blockquotes are enclosed with decorative typographic quotes. *Indie Gaia* chooses the quotation marks according to the presentation language or the blockquote language.
+
+**Default: presentation language** 
+
+```markdown
+---
+lang: en-GB
+---
+
+> Imagine if every Thursday your shoes exploded if you tied them the usual way. This happens to us all the time with computers, and nobody thinks of complaining 
+> — Jef Raskin, 1943—2005
 ```
 
-Update subtree:
+**Using blockquote language**
 
-```shell
-$ git subtree pull --prefix=themes git@github.com:marp-team/marp-core.git main --squash
+```markdown
+---
+lang: en-US
+---
+
+> <span lang="de">Theorie ist, wenn man alles weiß und nichts funktioniert. Praxis ist, wenn alles funktioniert und niemand weiß warum.</span> ...
 ```
+
+#### Available Languages
+
+| Scope             | lang                        | Font family         |
+| ----------------- | --------------------------- | ------------------- |
+| Default / English | `en` and `en-*` *or empty*  | **`“`** and **`”`** |
+| Germany           | `de` and `de-*`             | **`»`** and **`«`** |
+| France            | `fr` and `fr-*`             | **`«`** and **`»`** |
+| Italy             | `it` and `it-*`             | **`«`** and **`»`** |
+| Spain             | `es` and `es-*`             | **`«`** and **`»`** |
+| Switzerland       | `*-CH` — precedes any above | **`«`** and **`»`** |
+
+
+
+### No external Webfonts
+
+The original Gaia theme requires webfonts from an external webserver; this practice in some countries is considered a privacy protection problem. *Indie Gaia* instead makes use of generic CSS fonts. 
+
+Every major computer platform nowadays uses excellent and well-made OS fonts, so your presentation should look fine and legible on each. Note, however, that slides may look different on different platforms depending on the flow and amount of text.
+
+| Scope        | Font family                                        |
+| ------------ | -------------------------------------------------- |
+| Slides       | `system-ui, ui-sans-serif, sans-serif`             |
+| Code         | `ui-monospace, (… common mono fonts …), monospace` |
+| Block quotes | `ui-serif, (… common serif fonts…), serif`         |
+
+
+
+---
+
+## MIT License
+
+See [LICENSE](LICENSE) document.
 
